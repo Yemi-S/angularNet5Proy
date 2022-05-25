@@ -1,0 +1,108 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="titulo">TARJETA DE CREDITO</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!--Seccion agregar tarjeta-->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">AGREGAR TARJETA</h5>
+                    <form [formGroup]="formTarjeta" (ngSubmit)="agregarTarjeta()">
+                        <!--Titular de la tarjeta-->
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-user"
+                                [class.green-icon]="this.formTarjeta.get('titular')?.valid"
+                                [class.red-icon]="this.formTarjeta.get('titular')?.invalid && this.formTarjeta.get('titular')?.touched" 
+                                ></i>
+                            </span>
+                            <input formControlName="titular" type="text" class="form-control" placeholder="Titular">
+                        </div>
+                        <!--Número de la tarjeta-->
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-credit-card"
+                                [class.green-icon]="this.formTarjeta.get('numeroTarjeta')?.valid"
+                                [class.red-icon]="this.formTarjeta.get('numeroTarjeta')?.invalid && this.formTarjeta.get('numeroTarjeta')?.touched" 
+                                ></i>
+                            </span>
+                            <input formControlName="numeroTarjeta" maxlength="16" type="text" class="form-control" placeholder="Numero de Tarjeta">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <!--Fecha de expiración de la tarjeta-->
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-calendar-days"
+                                        [class.green-icon]="this.formTarjeta.get('fechaExpiracion')?.valid"
+                                        [class.red-icon]="this.formTarjeta.get('fechaExpiracion')?.invalid && this.formTarjeta.get('fechaExpiracion')?.touched" 
+                                        ></i>
+                                    </span>
+                                    <input formControlName="fechaExpiracion" maxlength="5" type="text" class="form-control" placeholder="MM/YY">
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <!--CVV de la tarjeta-->
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-key"
+                                        [class.green-icon]="this.formTarjeta.get('cvv')?.valid"
+                                        [class.red-icon]="this.formTarjeta.get('cvv')?.invalid && this.formTarjeta.get('cvv')?.touched"
+                                        ></i>
+                                    </span>
+                                    <input formControlName="cvv" maxlength="3" type="password" class="form-control" placeholder="CVV">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.formTarjeta.invalid" type="submit" class="btn btn-success btn-lg">
+                                <i class="fa-solid fa-database"></i>&nbsp;Aceptar</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Seccion listado de tarjetas-->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">LISTADO DE TARJETAS</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Titular</th>
+                                <th>N° de tarjeta</th>
+                                <th>Fecha de expiración</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tc of listaTarjetas">
+                                <td>{{tc.titular}}</td>
+                                <td>{{tc.numeroTarjeta}}</td>
+                                <td>{{tc.fechaExpiracion}}</td>
+                                <td>
+                                    <i class="fa-regular fa-pen-to-square text-info"></i>
+                                </td>
+                                <td>
+                                    <i class="fa-regular fa-trash-can text-danger"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
